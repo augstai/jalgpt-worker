@@ -1,0 +1,12 @@
+# Render Blueprint — deploys the worker from the /worker subfolder.
+# In Render: New → Blueprint → connect this repo → it reads this file.
+services:
+  - type: web
+    name: jalgpt-worker
+    runtime: docker
+    rootDir: worker
+    plan: free
+    healthCheckPath: /health
+    envVars:
+      - key: WORKER_TOKEN
+        generateValue: true # Render generates it; copy into Vercel's SCRAPER_WORKER_TOKEN
